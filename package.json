@@ -34,7 +34,6 @@
   "homepage": "https://github.com/crobinson42/dev-tool-box#readme",
   "dependencies": {
     "args": "^3.0.8",
-    "changelog": "^1.4.1",
     "colors": "^1.1.2",
     "generate-changelog": "^1.7.0",
     "git-command-line": "^0.1.5",

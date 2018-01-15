@@ -5,9 +5,11 @@
 */
 
 const path = require('path')
+const fs = require('fs')
 const pkg = require(path.join(process.cwd(), 'package.json'))
 const inquirer = require('inquirer')
 const shell = require('shelljs')
+const Changelog = require('generate-changelog')
 
 global.colors = require('colors')
 
@@ -37,7 +39,22 @@ inquirer
 
     console.log(`Bumping version and pushing a git tag`.blue.inverse)
 
-    shell.exec(
-      `npm version ${answers.version} && git push origin && git push origin --tags`,
-    )
+    if (!pkg.repository.url)
+      throw new Error('This package.json does not contain a repository URL')
+
+    const changelog = {
+      repoUrl: pkg.repository.url
+    }
+
+    changelog[answers.version] = true
+
+    Changelog.generate(changelog)
+      .then(function (changelog) {
+        fs.writeFileSync('./CHANGELOG.md', changelog);
+      })
+      .then(() => {
+        shell.exec(
+          `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags`,
+        )
+      })
   })
