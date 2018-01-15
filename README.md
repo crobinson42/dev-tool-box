@@ -1,6 +1,6 @@
-# tool-box
+# dev-tool-box
 
-https://www.npmjs.com/package/tool-box
+https://www.npmjs.com/package/dev-tool-box
 
 ## Use
 
@@ -22,6 +22,18 @@ tool-box aws-config
 ### aws-config
 ```
 tool-box aws-config
+```
+This is a helper function that is used in our Docker image containers
+for Bitbucket Pipelines builds. It uses the environment variables
+passed to the build environment to set the Docker containers AWS
+credentials so that the build can interface and perform operations with
+our AWS services. It sets access key and secret for AWS in
+"~/.aws/credentials". It expects the environment variables to be set
+and available: `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY`.
+
+### aws-config
+```
+tool-box package-version
 ```
 This is a helper function that is used in our Docker image containers
 for Bitbucket Pipelines builds. It uses the environment variables

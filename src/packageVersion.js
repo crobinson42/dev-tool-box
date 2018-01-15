@@ -8,6 +8,7 @@ const path = require('path')
 const pkg = require(path.join(process.cwd(), 'package.json'))
 const inquirer = require('inquirer')
 const shell = require('shelljs')
+const changelog = require('changelog')
 
 global.colors = require('colors')
 
@@ -23,7 +24,7 @@ inquirer
     {
       type: 'list',
       name: 'version',
-      message: "What type of release is this?",
+      message: 'What type of release is this?',
       choices: [
         { name: 'Major', value: 'major' },
         { name: 'Minor', value: 'minor' },
@@ -37,5 +38,29 @@ inquirer
 
     console.log(`Bumping version and pushing a git tag`.blue.inverse)
 
-    shell.exec(`npm run release:${answers.version}`)
+    changelog
+      .generate(pkg.name)
+      .then(function generateOutput(data) {
+        var fn = options.json
+          ? JSON.stringify
+          : options.markdown
+            ? require('./output/markdown')
+            : hasColor
+              ? require('./output/terminal')
+              : require('./output/markdown')
+        return fn(data)
+      })
+      .then(() => {
+        shell.exec(
+          `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags && npm publish`,
+        )
+      })
+      .catch(function(err) {
+        if (typeof err === 'string') {
+          console.log(err)
+        } else {
+          throw err
+        }
+      })
+      .done()
   })

@@ -1,8 +1,8 @@
 {
-  "name": "tool-box",
+  "name": "dev-tool-box",
   "version": "1.0.2",
-  "description": "CLI and other JS tools for developers",
-  "main": "index.js",
+  "description": "CLI and other JS tools for developers available in commonjs",
+  "main": "src/index.js",
   "preferGlobal": "true",
   "bin": {
     "tool-box": "bin/index.js"
@@ -34,6 +34,7 @@
   "homepage": "https://github.com/crobinson42/tool-box#readme",
   "dependencies": {
     "args": "^3.0.8",
+    "changelog": "^1.4.1",
     "colors": "^1.1.2",
     "generate-changelog": "^1.7.0",
     "git-command-line": "^0.1.5",
