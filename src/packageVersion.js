@@ -6,58 +6,36 @@
 
 const path = require('path')
 const pkg = require(path.join(process.cwd(), 'package.json'))
-const Git = require('git-command-line')
 const inquirer = require('inquirer')
+const shell = require('shelljs')
 
-if (!global.colors)
-  global.colors = require('colors')
+global.colors = require('colors')
+
+if (!global.colors) global.colors = require('colors')
 
 const PROJECT_ROOT_DIR = path.dirname('../')
 
 console.log(``.padStart(pkg.name.length + 12, '*').bgBlue)
 console.log(`   Project: ${pkg.name}`.inverse)
 
-// todo: add check that working tree is clean
-// todo: check and warn if not on develop branch
+inquirer
+  .prompt([
+    {
+      type: 'list',
+      name: 'version',
+      message: "What type of release is this?",
+      choices: [
+        { name: 'Major', value: 'major' },
+        { name: 'Minor', value: 'minor' },
+        { name: 'Patch', value: 'patch' },
+        { name: 'Not a versioned release', value: false },
+      ],
+    },
+  ])
+  .then(answers => {
+    if (!answers.version) return
 
-const git = new Git(PROJECT_ROOT_DIR)
+    console.log(`Bumping version and pushing a git tag`.blue.inverse)
 
-const questions = [
-  {
-    type: 'input',
-    name: 'version',
-    message: 'Release version:',
-    default: pkg.version,
-  },
-  {
-    type: 'confirm',
-    name: 'push_branch',
-    message: "Do you want to push this branch now to trigger a build?",
-    default: true,
-  },
-];
-
-inquirer.prompt(questions).then(answers => {
-  const releaseBranch = `release/${answers.version}`
-
-  console.log(`Cutting release branch: ${releaseBranch}`.green)
-
-  git.checkout(`-b ${releaseBranch}`)
-      .catch(function(err) {
-        console.log(`ERROR CREATING NEW BRANCH:`.red, err)
-      })
-      .then(() => {
-          if (answers.push_branch)
-            return git.push(`-f -u origin ${releaseBranch}`)
-      })
-      .catch(function(err) {
-          console.log(`ERROR PUSHING BRANCH TO REMOTE:`.red, err)
-      })
-      .then(() => {
-        console.log('Release branch cut complete'.green)
-
-        if (answers.push_branch)
-          console.log('The build is in process in Bitbucket Pipelines'.green)
-      })
-
-})
+    shell.exec(`npm run release:${answers.version}`)
+  })
