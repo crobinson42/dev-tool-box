@@ -49,11 +49,10 @@ inquirer
     changelog[answers.version] = true
 
     Changelog.generate(changelog)
-      .then(function (changelog) {
-        fs.writeFileSync('./CHANGELOG.md', changelog);
+      .then((changelog) => {
+        fs.writeFileSync(path.join(process.cwd(), './CHANGELOG.md'), changelog);
       })
       .then(() => {
-        console.log(`${answers.version}`)
         shell.exec(
           `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags`,
         )
