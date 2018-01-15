@@ -39,7 +39,7 @@ inquirer
     console.log(`Bumping version and pushing a git tag`.blue.inverse)
 
     changelog
-      .generate(pkg.name)
+      .generate(pkg.name, 1)
       .then(() => {
         shell.exec(
           `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags && npm publish`,
