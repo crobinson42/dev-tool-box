@@ -1,5 +1,11 @@
 #### 1.0.2 (2018-01-15)
 
+##### Bug Fixes
+
+*  package.json ([b17292a4](https://github.com/crobinson42/tool-box/commit/b17292a4abd5b9639896b1b56d66771034b753af))
+
+#### 1.0.2 (2018-01-15)
+
 #### 1.0.1 (2018-01-15)
 
 ##### New Features
