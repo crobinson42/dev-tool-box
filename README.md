@@ -1,6 +1,6 @@
 # tool-box
 
-https://www.npmjs.com/package/repo-tools
+https://www.npmjs.com/package/tool-box
 
 ## Use
 
@@ -14,14 +14,14 @@ specific files in this project.
 
 Run the `src/awsConfigure.js` file:
 ```
-repo-tools aws-config
+tool-box aws-config
 ```
 
 ## Commands
 
 ### aws-config
 ```
-repo-tools aws-config
+tool-box aws-config
 ```
 This is a helper function that is used in our Docker image containers
 for Bitbucket Pipelines builds. It uses the environment variables
@@ -33,7 +33,7 @@ and available: `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY`.
 
 ### release
 ```
-repo-tools release
+tool-box release
 ```
 A command line util that performs steps to cut a release branch
 from the current branch and push to origin. Provides CLI question
