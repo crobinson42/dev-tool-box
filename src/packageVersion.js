@@ -53,6 +53,7 @@ inquirer
         fs.writeFileSync('./CHANGELOG.md', changelog);
       })
       .then(() => {
+        console.log(`${answers.version}`)
         shell.exec(
           `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags`,
         )
