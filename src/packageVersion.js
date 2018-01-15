@@ -40,16 +40,6 @@ inquirer
 
     changelog
       .generate(pkg.name)
-      .then(function generateOutput(data) {
-        var fn = options.json
-          ? JSON.stringify
-          : options.markdown
-            ? require('./output/markdown')
-            : hasColor
-              ? require('./output/terminal')
-              : require('./output/markdown')
-        return fn(data)
-      })
       .then(() => {
         shell.exec(
           `git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version ${answers.version} && git push origin && git push origin --tags && npm publish`,

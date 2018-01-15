@@ -29,9 +29,9 @@
   "author": "coryrobinson42@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/crobinson42/tool-box/issues"
+    "url": "https://github.com/crobinson42/dev-tool-box/issues"
   },
-  "homepage": "https://github.com/crobinson42/tool-box#readme",
+  "homepage": "https://github.com/crobinson42/dev-tool-box#readme",
   "dependencies": {
     "args": "^3.0.8",
     "changelog": "^1.4.1",
