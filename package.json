@@ -1,6 +1,6 @@
 {
   "name": "tool-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI and other JS tools for developers",
   "main": "index.js",
   "preferGlobal": "true",
