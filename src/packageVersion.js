@@ -8,7 +8,6 @@ const path = require('path')
 const pkg = require(path.join(process.cwd(), 'package.json'))
 const inquirer = require('inquirer')
 const shell = require('shelljs')
-const changelog = require('changelog')
 
 global.colors = require('colors')
 
@@ -39,6 +38,6 @@ inquirer
     console.log(`Bumping version and pushing a git tag`.blue.inverse)
 
     shell.exec(
-      `npm version ${answers.version} && git push origin && git push origin --tags && npm publish`,
+      `npm version ${answers.version} && git push origin && git push origin --tags`,
     )
   })

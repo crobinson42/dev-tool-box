@@ -31,17 +31,12 @@ our AWS services. It sets access key and secret for AWS in
 "~/.aws/credentials". It expects the environment variables to be set
 and available: `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY`.
 
-### aws-config
+### package-version
 ```
 tool-box package-version
 ```
-This is a helper function that is used in our Docker image containers
-for Bitbucket Pipelines builds. It uses the environment variables
-passed to the build environment to set the Docker containers AWS
-credentials so that the build can interface and perform operations with
-our AWS services. It sets access key and secret for AWS in
-"~/.aws/credentials". It expects the environment variables to be set
-and available: `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY`.
+This is a helper function that prompts on the CLI which npm version
+to bump and also adds a git tag then pushes the tags.
 
 ### release
 ```
