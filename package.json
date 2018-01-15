@@ -1,6 +1,6 @@
 {
   "name": "dev-tool-box",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "CLI and other JS tools for developers available in commonjs",
   "main": "src/index.js",
   "preferGlobal": "true",
